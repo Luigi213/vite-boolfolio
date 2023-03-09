@@ -1,6 +1,10 @@
 <script>
 import axios from 'axios';
-export default {    
+import PostCard from './PostCard.vue';
+export default { 
+    components:{
+        PostCard
+    },
     data(){
         return{
             projects: [],
@@ -28,7 +32,7 @@ export default {
 }
 </script>
 <template lang="">
-    <div class="container">
+    <div class="container mt-4">
         <div class="row" v-if="loading">
             <div class="col-12 d-flex justify-content-center align-items-center align">
                 <div class="spinner-border" role="status">
@@ -36,8 +40,8 @@ export default {
             </div>
         </div>
         <div class="row" v-else>
-            <div class="col-12" v-for="project in projects">
-                {{ project }}
+            <div class="col-sm-4 d-flex justify-content-center gy-4" v-for="project in projects" :key="project.id">
+                <PostCard :project="project" :baseUrl="baseUrl"></PostCard>
             </div>
         </div>
     </div>
