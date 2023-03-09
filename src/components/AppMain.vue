@@ -15,7 +15,7 @@ export default {
         }
     },
     methods:{
-        projectArray(){
+        projectArray(current_page){
             this.loading = true
             axios.get(`${this.baseUrl}/api/project`).then(response =>{
                 this.loading = false;
@@ -27,7 +27,7 @@ export default {
         }
     },
     mounted() {
-        this.projectArray();
+        this.projectArray(this.currentPage);
     }
 }
 </script>
@@ -43,6 +43,16 @@ export default {
             <div class="col-sm-4 d-flex justify-content-center gy-4" v-for="project in projects" :key="project.id">
                 <PostCard :project="project" :baseUrl="baseUrl"></PostCard>
             </div>
+            <nav>
+                <ul class="list-unstyled d-flex justify-content-center">
+                    <li>
+                        <button type="button" class="btn btn-primary m-1" @click="projectArray(currentPage - 1)">Prev</button>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-primary m-1" @click="projectArray(currentPage + 1)">Next</button>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </template>
