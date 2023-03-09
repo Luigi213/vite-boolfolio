@@ -15,19 +15,21 @@ export default {
         }
     },
     methods:{
-        projectArray(current_page){
-            this.loading = true
-            axios.get(`${this.baseUrl}/api/project`).then(response =>{
-                this.loading = false;
-
-                this.projects = response.data.results.data;
-                this.currentPage = response.data.results.currentpage;
-                this.lastPage = response.data.results.lastpage;
+        projectArray(currentPage){
+            this.loading = true;
+            axios.get(`${this.baseUrl}/api/project`, { params:{'page': currentPage}}).then(response =>{
+                if(response.data.success){
+                    this.loading = false;
+    
+                    this.projects = response.data.results.data;
+                    this.currentPage = response.data.results.current_page;
+                    this.lastPage = response.data.results.last_page;
+                }
             });
         }
     },
     mounted() {
-        this.projectArray(this.currentPage);
+        this.projectArray(this.current_page);
     }
 }
 </script>
@@ -44,12 +46,15 @@ export default {
                 <PostCard :project="project" :baseUrl="baseUrl"></PostCard>
             </div>
             <nav>
-                <ul class="list-unstyled d-flex justify-content-center">
-                    <li>
-                        <button type="button" class="btn btn-primary m-1" @click="projectArray(currentPage - 1)">Prev</button>
+                <ul class="list-unstyled d-flex justify-content-center pagination mt-3">
+                    <li :class="currentPage === 1 ? 'disabled' : 'page-item'">
+                        <button class="page-link" @click="projectArray(currentPage - 1)">Prev</button>
                     </li>
-                    <li>
-                        <button type="button" class="btn btn-primary m-1" @click="projectArray(currentPage + 1)">Next</button>
+                    <li class="page-item" v-for="i in lastPage">
+                        <button class="page-link" @click="projectArray(i)" >{{i}}</button>
+                    </li>
+                    <li :class="currentPage === lastPage ? 'disabled' : 'page-item'">
+                        <button class="page-link" @click="projectArray(currentPage + 1)">Next</button>
                     </li>
                 </ul>
             </nav>
