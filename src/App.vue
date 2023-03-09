@@ -1,10 +1,10 @@
 <script>
-  import AppMain from './components/AppMain.vue';
-  export default {
-    components:{
-      AppMain
-    }
+import AppMain from './components/AppMain.vue';
+export default {
+  components: {
+    AppMain
   }
+}
 </script>
 
 <template>
@@ -12,5 +12,5 @@
 </template>
 
 <style lang="scss">
-  @use './styles/app.scss';
+@use './styles/app.scss';
 </style>
