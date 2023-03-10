@@ -50,7 +50,7 @@ export default {
                     <li :class="currentPage === 1 ? 'disabled' : 'page-item'">
                         <button class="page-link" @click="projectArray(currentPage - 1)">Prev</button>
                     </li>
-                    <li class="page-item" v-for="i in lastPage">
+                    <li :class="currentPage === i ? 'disabled' : 'page-item'" v-for="i in lastPage">
                         <button class="page-link" @click="projectArray(i)" >{{i}}</button>
                     </li>
                     <li :class="currentPage === lastPage ? 'disabled' : 'page-item'">
