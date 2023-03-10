@@ -2,6 +2,7 @@
 import axios from 'axios';
 import PostCard from './PostCard.vue';
 export default { 
+    name: 'AppMain',
     components:{
         PostCard
     },
