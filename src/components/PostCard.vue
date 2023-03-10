@@ -27,6 +27,9 @@ export default {
             </p>
             <p class="card-text"><strong>Descrizione: </strong>{{project.descrizione}}</p>
         </div>
+        <div class="card-footer">
+            <router-link class="btn btn-sm btn-success" :to="{ name: 'post_info', params: { titolo: project.titolo}}">Approfondisci</router-link>
+        </div>
     </div>
 </template>
 <style lang="scss" scoped>

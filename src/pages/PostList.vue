@@ -1,7 +1,7 @@
 <script>
 import axios from 'axios';
 import PostCard from '../components/PostCard.vue';
-import { store } from '../store.js'
+import { store } from '../store.js';
 export default { 
     name: 'PostList',
     components:{
@@ -9,9 +9,9 @@ export default {
     },
     data(){
         return{
+            store,
             projects: [],
             loading: true,
-            store,
             currentPage: 1,
             lastPage: null
         }
