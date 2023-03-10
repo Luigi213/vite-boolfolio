@@ -1,8 +1,8 @@
 <script>
 import axios from 'axios';
-import PostCard from './PostCard.vue';
+import PostCard from '../PostCard.vue';
 export default { 
-    name: 'AppMain',
+    name: 'PostList',
     components:{
         PostCard
     },
