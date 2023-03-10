@@ -2,6 +2,7 @@
 import { store } from '../store.js';
 import axios from 'axios';
 export default {
+    name:'PostInfo',
     data(){
         return{
             store,
@@ -12,8 +13,13 @@ export default {
     mounted(){
         this.loading = true;
         axios.get(`${this.store.baseUrl}/api/project/${this.$route.params.titolo}`).then((response) =>{
-            this.post = response.data.results;
-            this.loading = false;
+            if(response.data.success){
+                this.post = response.data.results;
+                this.loading = false;
+            }
+            else{
+                this.$route.push({name: 'not_found'})
+            }
         });
     }
 }
