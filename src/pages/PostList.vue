@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
-import PostCard from '../PostCard.vue';
+import PostCard from '../components/PostCard.vue';
+import { store } from '../store.js'
 export default { 
     name: 'PostList',
     components:{
@@ -10,7 +11,7 @@ export default {
         return{
             projects: [],
             loading: true,
-            baseUrl: 'http://localhost:8000',
+            store,
             currentPage: 1,
             lastPage: null
         }
@@ -18,13 +19,14 @@ export default {
     methods:{
         projectArray(currentPage){
             this.loading = true;
-            axios.get(`${this.baseUrl}/api/project`, { params:{'page': currentPage}}).then(response =>{
+            axios.get(`${this.store.baseUrl}/api/project`, { params:{'page': currentPage}}).then(response =>{
                 if(response.data.success){
-                    this.loading = false;
-    
+                    
                     this.projects = response.data.results.data;
                     this.currentPage = response.data.results.current_page;
                     this.lastPage = response.data.results.last_page;
+
+                    this.loading = false;
                 }
             });
         }
@@ -44,7 +46,7 @@ export default {
         </div>
         <div class="row" v-else>
             <div class="col-sm-4 d-flex justify-content-center gy-4" v-for="project in projects" :key="project.id">
-                <PostCard :project="project" :baseUrl="baseUrl"></PostCard>
+                <PostCard :project="project"></PostCard>
             </div>
             <nav>
                 <ul class="list-unstyled d-flex justify-content-center pagination mt-3">

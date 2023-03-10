@@ -1,6 +1,12 @@
 <script>
+import { store } from '../store.js'
 export default {
     name:'PostCard',
+    data(){
+        return{
+            store
+        }
+    },
     props:{
         project: Object,
         baseUrl: String
@@ -9,7 +15,7 @@ export default {
 </script>
 <template>
     <div class="card w-100">
-        <img :src="project.post_image != null ? `${baseUrl}/storage/${project.post_image}` : 'https://picsum.photos/300/200'" :alt="project.id">
+        <img :src="project.post_image != null ? `${store.baseUrl}/storage/${project.post_image}` : 'https://picsum.photos/300/200'" :alt="project.id">
         <div class="card-body">
             <h5 class="card-title mb-4">{{project.titolo}}</h5>
             <p class="card-text"><strong>Tipo: </strong><em class="badge bg-warning">{{project.type != null ? project.type.name : 'Nessun tipo'}}</em></p>
