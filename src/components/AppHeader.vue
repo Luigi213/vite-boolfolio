@@ -11,7 +11,11 @@ export default {
                 {
                     label: 'Post',
                     routeName: 'post'
-                }
+                },
+                {
+                    label: 'Contact',
+                    routeName: 'contact'
+                },
             ]
         }
     }

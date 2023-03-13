@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from './pages/HomePage.vue';
 import PostList from './pages/PostList.vue';
 import PostInfo from './pages/PostInfo.vue';
+import Contact from './pages/Contact.vue';
 import NotFound from './pages/NotFound.vue';
 
 const router = createRouter({
@@ -22,6 +23,11 @@ const router = createRouter({
             path: '/post/:titolo',
             name: 'post_info',
             component: PostInfo
+        },
+        {
+            path: '/contact',
+            name: 'contact',
+            component: Contact
         },
         {
             path: '/*',
