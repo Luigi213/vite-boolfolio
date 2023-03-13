@@ -11,7 +11,7 @@ export default {
             number: '',
             message: '',
             errors: null,
-            loading: true
+            loading: false
         }
     },
     methods:{
@@ -24,16 +24,19 @@ export default {
                 message: this.message
             };
 
+            this.loading = true;
+
             axios.post(`${this.store.baseUrl}/api/contact`, data).then((response) =>{
                 if(!response.data.success){
                     this.errors = response.data.errors
                 }
                 else{
-                    this.name = '',
-                    this.surname = '',
-                    this.email = '', 
-                    this.number = '',
-                    this.message = ''
+                    this.name = '';
+                    this.surname = '';
+                    this.email = '';
+                    this.number = '';
+                    this.message = '';
+                    this.loading = false;
                 }
             });
         }
@@ -77,7 +80,7 @@ export default {
                             <textarea name="message" id="messaggio" class="form-control" rows="2" v-model="message"></textarea>
                         </div>
                         <div class="form-group my-3">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" :disabled="loading">{{ loading ? 'Invio in corso...' : 'Invia'}}</button>
                         </div>
                     </div>
                 </form>
